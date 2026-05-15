@@ -41,10 +41,20 @@ example (x: ℕ): f 0 x → x = 0 := by
 
 -- Give a direct proof
 example (x: ℕ): f x 1 → x ≠ 2 := by
-  sorry -- [TODO]
+  intro h
+  rw [f] at h
+  rw [h] -- reemplaza la asignacion de h (x = 1) en el goal
+  trivial -- o simp
+
 
 example (x y: ℕ): f 0 x ∧ f 0 y → x = y := by
-  sorry --[TODO]
+  intro h
+  repeat rw [f] at h
+  -- con "omega" ya está
+  obtain ⟨h1, h2⟩ := h
+  symm at h1 h2
+  rw [h1]
+  rw [h2] -- queda 0=0, termina solo.
 
 
 /-! Bonus:
@@ -55,7 +65,14 @@ example (x y: ℕ): f 0 x ∧ f 0 y → x = y := by
 
 -- Prove by contradiction
 example (h1: a = b): a = b:= by
-  sorry
+  by_contra h2
+  -- we have two contradictory hypothesis, so we can apply contradiction
+  contradiction
+
 
 example (x: ℕ): f x 1 → x ≠ 2 := by
-  sorry
+  intro h1
+  rw [f] at h1
+  rw [h1]
+  by_contra h2
+  contradiction
