@@ -31,8 +31,8 @@ def Q1 : Prop := 1 ≠ 1
 theorem [name] {optional parameters/assumptions} : [proposition] := [proof]
 -/
 
-theorem one_eq_one : 1 = 1 := sorry
-theorem one_eq_one': P1 := sorry
+theorem one_eq_one : 1 = 1 := rfl
+theorem one_eq_one': P1 := rfl
 
 -- Let's check type of these thoerems
 #check one_eq_one
@@ -45,7 +45,7 @@ theorem one_eq_one': P1 := sorry
 -/
 
 -- another example
-theorem x_pos (x : ℤ) (h: 1 < x) : 0 ≤ x := sorry
+theorem x_pos (x : ℤ) (h: 1 < x) : 0 ≤ x := by omega
 #check x_pos
 
 /-!
@@ -71,13 +71,29 @@ variable (P Q: Prop)
 example : P = P := rfl
 example : 2 + 1 + 1 = 4 := rfl
 
-example : P → P := by sorry
+example : P → P := by
+  intro h
+  exact h
 
-example : P → (Q → P) := by sorry
+example : P → (Q → P) := by
+  intro hp
+  intro hq
+  exact hp
 
-example (hP: P) (hQ: Q) : P ∧ Q := by sorry
+example (hP: P) (hQ: Q) : P ∧ Q := by
+  constructor
+  . exact hP
+  . exact hQ
 
 example: P ∧ Q ↔ Q ∧ P:= by
   constructor
-  · sorry
-  · sorry
+  · intro hpq -- P ∧ Q implies Q ∧ P
+    obtain ⟨hp, hq⟩ := hpq
+    constructor
+    . exact hq
+    . exact hp
+  · intro hqp -- Q ∧ P implies P ∧ Q
+    obtain ⟨hq, hp⟩ := hqp
+    constructor
+    . exact hp
+    . exact hq

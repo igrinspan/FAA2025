@@ -40,9 +40,11 @@ example (x: ℕ): f 0 x → x = 0 := by
   assumption
 
 -- Give a direct proof
-example (x: ℕ): f x 1 → x ≠ 2 := by sorry -- [TODO]
+example (x: ℕ): f x 1 → x ≠ 2 := by
+  sorry -- [TODO]
 
-example (x y: ℕ): f 0 x ∧ f 0 y → x = y := by sorry --[TODO]
+example (x y: ℕ): f 0 x ∧ f 0 y → x = y := by
+  sorry --[TODO]
 
 
 /-! Bonus:
@@ -52,6 +54,8 @@ example (x y: ℕ): f 0 x ∧ f 0 y → x = y := by sorry --[TODO]
 -/
 
 -- Prove by contradiction
-example (h1: a = b): a = b:= by sorry
+example (h1: a = b): a = b:= by
+  sorry
 
-example (x: ℕ): f x 1 → x ≠ 2 := by sorry
+example (x: ℕ): f x 1 → x ≠ 2 := by
+  sorry
